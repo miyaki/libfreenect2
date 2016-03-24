@@ -285,7 +285,6 @@ namespace Freenect2Driver
         case ONI_DEVICE_PROPERTY_FIRMWARE_VERSION:        // string
         case ONI_DEVICE_PROPERTY_DRIVER_VERSION:          // OniVersion
         case ONI_DEVICE_PROPERTY_HARDWARE_VERSION:        // int
-        case ONI_DEVICE_PROPERTY_SERIAL_NUMBER:           // string
         case ONI_DEVICE_PROPERTY_ERROR_STATE:             // ?
         // files
         case ONI_DEVICE_PROPERTY_PLAYBACK_SPEED:          // float
@@ -298,6 +297,10 @@ namespace Freenect2Driver
         case XN_MODULE_PROPERTY_SERIAL_NUMBER:            // unsigned long long
         case XN_MODULE_PROPERTY_VERSION:                  // XnVersions
           return ONI_STATUS_NOT_SUPPORTED;
+
+        case ONI_DEVICE_PROPERTY_SERIAL_NUMBER:           // string
+          strcpy((char*)data, dev->getSerialNumber().c_str());
+          return ONI_STATUS_OK;
 
         case ONI_DEVICE_PROPERTY_IMAGE_REGISTRATION:      // OniImageRegistrationMode
           if (*pDataSize != sizeof(OniImageRegistrationMode))
