@@ -193,6 +193,14 @@ namespace Freenect2Driver
       this->dev = dev;
       dev->setColorFrameListener(&listener);
       dev->setIrAndDepthFrameListener(&listener);
+
+      libfreenect2::Freenect2Device::Config config;
+      config.EnableBilateralFilter = true;
+      config.EnableEdgeAwareFilter = true;
+      config.MinDepth = 0.1;
+      config.MaxDepth = 12.0;
+      dev->setConfiguration(config);
+
       reg = new Registration(dev);
       allocStream();
     }
