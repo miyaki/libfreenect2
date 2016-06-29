@@ -315,6 +315,13 @@ int main(int argc, char *argv[])
   dev->setIrAndDepthFrameListener(&listener);
 /// [listeners]
 
+  libfreenect2::Freenect2Device::Config config;
+  config.EnableBilateralFilter = true;
+  config.EnableEdgeAwareFilter = true;
+  config.MinDepth = 0.1;
+  config.MaxDepth = 12.0;
+  dev->setConfiguration(config);
+
 /// [start]
   if (enable_rgb && enable_depth)
   {
